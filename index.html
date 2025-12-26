@@ -2,35 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link id="dynamic-favicon" rel="icon" type="image/png" href />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet">
-    <title>RetroRa</title>
+    <title>porfoilio</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
-      function createBlackDotFavicon() {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-
-        canvas.width = 64;
-        canvas.height = 64;
-
-        ctx.fillStyle = "green";
-        ctx.beginPath();
-        ctx.arc(canvas.width / 2, canvas.height / 2, 20, 0, Math.PI * 2, false);
-        ctx.fill();
-
-        const favicon = document.getElementById("dynamic-favicon");
-        favicon.href = canvas.toDataURL("image/png");
-      }
-
-      createBlackDotFavicon();
-    </script>
-
   </body>
 </html>

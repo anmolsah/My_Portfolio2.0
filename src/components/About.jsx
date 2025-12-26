@@ -1,127 +1,273 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { Terminal, Cpu, Code2 } from "lucide-react";
-import useSound from "use-sound";
+import { GraduationCap, Code2, Rocket, Heart } from "lucide-react";
 
 const About = () => {
-  const [playBeep] = useSound("/sounds/beep.mp3", { volume: 0.3 });
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      },
+    },
+  };
+
+  const highlights = [
+    {
+      icon: GraduationCap,
+      title: "Fresh Graduate",
+      description:
+        "Recently completed my degree with a strong foundation in computer science fundamentals.",
+    },
+    {
+      icon: Code2,
+      title: "Passionate Coder",
+      description:
+        "Love turning ideas into reality through clean, efficient code and modern technologies.",
+    },
+    {
+      icon: Rocket,
+      title: "Quick Learner",
+      description:
+        "Eager to learn new technologies and adapt quickly to challenging environments.",
+    },
+    {
+      icon: Heart,
+      title: "Team Player",
+      description:
+        "Collaborative mindset with excellent communication skills and positive attitude.",
+    },
+  ];
 
   return (
-    <section className="py-20 bg-gray-900 relative overflow-hidden">
-      {/* Retro Grid Background */}
-      <div className="absolute inset-0 grid grid-cols-12 gap-4 opacity-5">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <div key={i} className="border-r border-neon-cyan h-full" />
-        ))}
+    <section
+      id="about"
+      className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
+    >
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full blur-[140px]"
+          style={{ backgroundColor: "rgba(59, 151, 151, 0.12)" }}
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [-20, 20, -20],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full blur-[120px]"
+          style={{ backgroundColor: "rgba(191, 9, 47, 0.1)" }}
+          animate={{
+            scale: [1.1, 1, 1.1],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-12 items-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
         >
-          <div className="relative">
-            <div className="pixel-corners bg-gray-800 p-6 border-l-2 border-neon-pink">
-              <h2 className="text-3xl font-press-start mb-6 text-neon-cyan">
-                <span className="text-neon-pink">&gt;</span> ABOUT.exe
-              </h2>
-              <div className="space-y-4 font-ibm text-gray-300">
-                <p className="typing-effect">
-                  <span className="text-neon-pink">$</span> Initializing
-                  developer profile...
+          {/* Section header */}
+          <motion.div variants={itemVariants} className="text-center mb-16">
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm mb-6"
+              style={{ color: "#3B9797" }}
+            >
+              Get to know me
+            </motion.div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+              About <span className="gradient-text">Me</span>
+            </h2>
+          </motion.div>
+
+          {/* Main content */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Photo section */}
+            <motion.div
+              variants={itemVariants}
+              className="relative mx-auto lg:mx-0"
+            >
+              <motion.div
+                className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Decorative ring */}
+                <motion.div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #BF092F, #16476A, #3B9797)",
+                    padding: "3px",
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                >
+                  <div className="w-full h-full rounded-full bg-[#0a0a0a]" />
+                </motion.div>
+
+                {/* Photo container */}
+                <div className="absolute inset-4 rounded-full overflow-hidden border-2 border-white/10">
+                  {/* Replace this with your actual photo */}
+                  <img
+                    src="/your-photo.jpg"
+                    alt="Your Name"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.style.display = "none";
+                      e.target.nextSibling.style.display = "flex";
+                    }}
+                  />
+                  {/* Placeholder - will show if image fails to load */}
+                  <div
+                    className="w-full h-full items-center justify-center text-6xl hidden"
+                    style={{
+                      background: "linear-gradient(135deg, #132440, #16476A)",
+                      display: "none",
+                    }}
+                  >
+                    👨‍💻
+                  </div>
+                </div>
+
+                {/* Floating badges */}
+                <motion.div
+                  className="absolute -top-2 -right-2 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10"
+                  style={{ backgroundColor: "rgba(191, 9, 47, 0.9)" }}
+                  animate={{ y: [-5, 5, -5] }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <span className="text-white font-semibold text-sm">
+                    Open to Work
+                  </span>
+                </motion.div>
+
+                <motion.div
+                  className="absolute -bottom-2 -left-2 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10"
+                  style={{ backgroundColor: "rgba(59, 151, 151, 0.9)" }}
+                  animate={{ y: [5, -5, 5] }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
+                >
+                  <span className="text-white font-semibold text-sm">
+                    Fresher 2024
+                  </span>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+
+            {/* Text content */}
+            <motion.div variants={itemVariants} className="space-y-6">
+              <div className="space-y-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-white">
+                  A passionate developer ready to make an impact
+                </h3>
+                <p className="text-gray-400 leading-relaxed">
+                  Hello! I'm a recent graduate with a deep passion for web
+                  development and creating meaningful digital experiences. My
+                  journey in tech started with curiosity and has grown into a
+                  full-fledged commitment to building innovative solutions.
                 </p>
-                <p>
-                  I'm a motivated software developer eager to apply my skills 
-                  and learn new technologies. I am passionate about building 
-                  creative and efficient solutions to everyday problems.
+                <p className="text-gray-400 leading-relaxed">
+                  During my academic journey, I've worked on various projects
+                  that helped me develop strong problem-solving skills and a
+                  keen eye for detail. I'm excited to bring my fresh
+                  perspective, enthusiasm, and dedication to a team where I can
+                  contribute and grow.
                 </p>
-                <p className="text-neon-cyan">
-                    STATUS: Looking for opportunities to grow
+                <p className="text-gray-400 leading-relaxed">
+                  When I'm not coding, you'll find me exploring new
+                  technologies, contributing to open-source projects, or
+                  learning about the latest industry trends.
                 </p>
               </div>
-            </div>
+
+              {/* Quick stats */}
+              <div className="grid grid-cols-3 gap-4 pt-4">
+                {[
+                  { value: "5+", label: "Projects" },
+                  { value: "10+", label: "Technologies" },
+                  { value: "100%", label: "Dedication" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="text-center p-4 rounded-xl bg-white/5 border border-white/10"
+                  >
+                    <div
+                      className="text-2xl md:text-3xl font-bold"
+                      style={{ color: "#3B9797" }}
+                    >
+                      {stat.value}
+                    </div>
+                    <div className="text-gray-400 text-sm mt-1">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
-          <div className="space-y-6">
-            <h3 className="font-press-start text-xl text-neon-gold mb-8">
-              SERVICES_OFFERED
-            </h3>
-
-            {[
-              {
-                code: "01",
-                title: "Responsive Website Development",
-                description: "Mobile-first responsive designs",
-                icon: Code2,
-              },
-              {
-                code: "02",
-                title: "Figma to HTML Conversion",
-                description: "Pixel-perfect implementations",
-                icon: Terminal,
-              },
-              {
-                code: "03",
-                title: "React.js Frontend Development",
-                description: "Modern component-based apps",
-                icon: Cpu,
-              },
-              {
-                code: "04",
-                title: "Landing Pages",
-                description: "High-converting landing pages",
-                icon: Code2,
-              },
-              {
-                code: "05",
-                title: "Full Website Creation",
-                description: "Complete web solutions",
-                icon: Terminal,
-              },
-              {
-                code: "06",
-                title: "Personal Portfolio Sites",
-                description: "Professional portfolio websites",
-                icon: Cpu,
-              },
-              {
-                code: "07",
-                title: "Full Stack Development",
-                description: "End-to-end web applications",
-                icon: Code2,
-              },
-            ].map((item, index) => (
+          {/* Highlights grid */}
+          {/* <motion.div
+            variants={itemVariants}
+            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-20"
+          >
+            {highlights.map((item, index) => (
               <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={item.title}
+                className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group"
+                whileHover={{ y: -8, scale: 1.02 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ x: 10 }}
-                onHoverStart={() => playBeep()}
-                className="flex gap-4 items-start group cursor-pointer"
+                transition={{ delay: index * 0.1 }}
               >
-                <div className="w-24 flex-shrink-0">
-                  <span className="text-sm font-press-start text-neon-cyan">
-                    {item.code}
-                  </span>
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundColor: "rgba(59, 151, 151, 0.2)" }}
+                >
+                  <item.icon className="w-6 h-6" style={{ color: "#3B9797" }} />
                 </div>
-                <div className="flex-1 pb-6 border-l-2 border-gray-800 pl-4 group-hover:border-neon-pink transition-colors duration-300">
-                  <div className="flex items-center gap-2">
-                    <item.icon className="w-5 h-5 text-neon-pink" />
-                    <h4 className="font-press-start text-sm text-white">
-                      {item.title}
-                    </h4>
-                  </div>
-                  <p className="text-gray-400 mt-2 font-ibm">
-                    {item.description}
-                  </p>
-                </div>
+                <h4 className="text-lg font-semibold text-white mb-2">
+                  {item.title}
+                </h4>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  {item.description}
+                </p>
               </motion.div>
             ))}
-          </div>
+          </motion.div> */}
         </motion.div>
       </div>
     </section>
@@ -129,104 +275,3 @@ const About = () => {
 };
 
 export default About;
-
-// import React from "react";
-// import useSound from "use-sound";
-// import { motion } from "framer-motion";
-// import { Terminal, Cpu, Code2 } from "lucide-react";
-
-// const About = () => {
-//   const [playBeep] = useSound("/sounds/beep.mp3", { volume: 0.5 });
-//   return (
-//     <section className="py-20 bg-gray-900 relative overflow-hidden">
-//       <div className="absolute inset-0 grid grid-cols-12 gap-4 opacity-5">
-//         {Array.from({ length: 12 }).map((_, i) => (
-//           <div key={i} className="border-r border-neon-cyan h-full" />
-//         ))}
-//       </div>
-//       <div className="container mx-auto px-4">
-//         <motion.div
-//           initial={{ opacity: 0, y: 20 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           className="grid md:grid-cols-2 gap-12 items-center"
-//         >
-//           <div className="relative">
-//             <div className="pixel-corners bg-gray-800 p-6 border-l-2 border-neon-pink">
-//               <h2 className="text-3xl font-press-start mb-6 text-neon-cyan">
-//                 <span className="text-neon-pink">&gt;</span>ABOUT.exe
-//               </h2>
-//               <div className="space-y-4 font-ibm text-gray-300">
-//                 <p className="typing-effect">
-//                   <span className="text-neon-pink">$</span>
-//                   Initializing profile...
-//                 </p>
-//                 <p>
-//                   I'm a motivated software developer eager to apply my skills
-//                   and learn new technologies. I am passionate about building
-//                   creative and efficient solutions to everyday problems.
-//                 </p>
-//                 <p className="text-neon-cyan">
-//                   STATUS: Looking for opportunities to grow
-//                 </p>
-//               </div>
-//             </div>
-//           </div>
-//           <div className="space-y-6">
-//             <h3 className="font-press-start text-xl text-neon-gold mb-8">
-//               TECH_STACK
-//             </h3>
-//             {[
-//               {
-//                 year: "2023",
-//                 title: "Self-Taught Developer",
-//                 company: "Personal Projects",
-//                 icon: Code2,
-//               },
-//               {
-//                 year: "2022",
-//                 title: "TA(teaching Assistant)",
-//                 company: "Coding Ninjas",
-//                 icon: Terminal,
-//               },
-//               {
-//                 year: "2021",
-//                 title: "Freelancer",
-//                 company: "Freelance Projects",
-//                 icon: Cpu,
-//               },
-//             ].map((item, index) => (
-//               <motion.div
-//                 key={index}
-//                 initial={{ opacity: 0, x: -20 }}
-//                 whileInView={{ opacity: 1, x: 0 }}
-//                 viewport={{ once: true }}
-//                 transition={{ delay: index * 0.2 }}
-//                 whileHover={{ x: 10 }}
-//                 onHoverStart={() => playBeep()}
-//                 className="flex gap-4 items-start group cursor-pointer"
-//               >
-//                 <div className="w-24 flex-shrink-0 ">
-//                   <span className="text-sm font-press-start text-neon-cyan">
-//                     {item.year}
-//                   </span>
-//                 </div>
-//                 <div className="flex-1 pb-6 border-l-2 border-gray-800 pl-4 group-hover:border-neon-pink transition-colors duration-400">
-//                   <div className="flex items-center gap-2">
-//                     <item.icon className="w-5 h-5 text-neon-pink" />
-//                     <h4 className="font-press-start text-sm text-white">
-//                       {item.title}
-//                     </h4>
-//                   </div>
-//                   <p className="text-gray-400 mt-2 font-ibm">{item.company}</p>
-//                 </div>
-//               </motion.div>
-//             ))}
-//           </div>
-//         </motion.div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default About;
