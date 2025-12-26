@@ -54,9 +54,9 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/anmol-sah-551083238/", label: "LinkedIn" },
+    { icon: Twitter, href: "https://x.com/anni_i29", label: "Twitter" },
   ];
 
   const containerVariants = {

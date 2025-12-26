@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Code2, Rocket, Heart } from "lucide-react";
+import { asset } from "../assets/assets";
 
 const About = () => {
   const containerVariants = {
@@ -132,7 +133,7 @@ const About = () => {
                 <div className="absolute inset-4 rounded-full overflow-hidden border-2 border-white/10">
                   {/* Replace this with your actual photo */}
                   <img
-                    src="/your-photo.jpg"
+                    src={asset.photo}
                     alt="Your Name"
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -180,7 +181,7 @@ const About = () => {
                   }}
                 >
                   <span className="text-white font-semibold text-sm">
-                    Fresher 2024
+                    Fresher 2025
                   </span>
                 </motion.div>
               </motion.div>
@@ -215,7 +216,7 @@ const About = () => {
               {/* Quick stats */}
               <div className="grid grid-cols-3 gap-4 pt-4">
                 {[
-                  { value: "5+", label: "Projects" },
+                  { value: "15+", label: "Projects" },
                   { value: "10+", label: "Technologies" },
                   { value: "100%", label: "Dedication" },
                 ].map((stat) => (
@@ -237,37 +238,6 @@ const About = () => {
               </div>
             </motion.div>
           </div>
-
-          {/* Highlights grid */}
-          {/* <motion.div
-            variants={itemVariants}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-20"
-          >
-            {highlights.map((item, index) => (
-              <motion.div
-                key={item.title}
-                className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group"
-                whileHover={{ y: -8, scale: 1.02 }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{ backgroundColor: "rgba(59, 151, 151, 0.2)" }}
-                >
-                  <item.icon className="w-6 h-6" style={{ color: "#3B9797" }} />
-                </div>
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  {item.title}
-                </h4>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div> */}
         </motion.div>
       </div>
     </section>

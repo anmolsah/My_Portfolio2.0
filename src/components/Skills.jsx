@@ -80,9 +80,9 @@ const Skills = () => {
       color: "#ffffff",
     },
     {
-      name: "Figma",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
-      color: "#F24E1E",
+      name: "Postman",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+      color: "#FF6C37",
     },
     {
       name: "HTML5",
@@ -240,7 +240,7 @@ const Skills = () => {
               <span className="text-gray-300">
                 Currently learning:{" "}
                 <span className="text-white font-semibold">
-                  Next.js, AWS, System Design
+                  Typescript, GCP, System Design
                 </span>
               </span>
             </div>

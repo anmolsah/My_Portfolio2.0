@@ -39,7 +39,11 @@ const Hero = () => {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/anmol-sah-551083238/", label: "LinkedIn" },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/anmol-sah-551083238/",
+      label: "LinkedIn",
+    },
     { icon: Mail, href: "annifind010@gamil.com", label: "Email" },
   ];
 
@@ -144,7 +148,8 @@ const Hero = () => {
           className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed px-4"
         >
           I craft exceptional digital experiences with clean code and creative
-          design. Passionate about building products that make a difference.
+          design. Passionate about building products that make a difference and
+          contributing to open source projects.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -213,21 +218,28 @@ const Hero = () => {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.a
+        href="#projects"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8 }}
+        onClick={(e) => {
+          e.preventDefault();
+          document
+            .getElementById("projects")
+            ?.scrollIntoView({ behavior: "smooth" });
+        }}
       >
         <motion.div
-          className="flex flex-col items-center gap-2 text-gray-500"
+          className="flex flex-col items-center gap-2 text-gray-500 hover:text-[#3B9797] transition-colors"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <span className="text-xs uppercase tracking-widest">Scroll</span>
           <ArrowDown className="w-4 h-4" />
         </motion.div>
-      </motion.div>
+      </motion.a>
     </section>
   );
 };
