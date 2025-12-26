@@ -1,17 +1,25 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Folder } from "lucide-react";
+import { asset } from "../assets/assets";
 
 const Projects = () => {
   const projects = [
     {
-      title: "Project One",
+      title: "NexoraAI",
       description:
-        "A full-stack web application with real-time features, authentication, and a modern UI. Built with performance and scalability in mind.",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
-      tags: ["React", "Node.js", "MongoDB", "Socket.io"],
-      github: "#",
-      live: "#",
+        "NexoraAI is a comprehensive AI-powered content creation platform that provides users with a suite of intelligent tools to generate articles, create images, edit photos, and review resumes. Built with modern web technologies, it offers both free and premium tiers to cater to different user needs.",
+      image: asset.project1Image,
+      tags: [
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "Clerk",
+        "Cloudinary",
+        "Neon Database",
+        "OpenRouter",
+      ],
+      github: "https://github.com/anmolsah/NexoraAI",
+      live: "https://nexora-ai-frontend-nine.vercel.app/",
       featured: true,
     },
     {
