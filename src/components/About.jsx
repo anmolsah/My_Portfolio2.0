@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Code2, Rocket, Heart } from "lucide-react";
 import { asset } from "../assets/assets";
+import { useTheme } from "../context/ThemeContext";
 
 const About = () => {
+  const { isDark } = useTheme();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -89,12 +91,20 @@ const About = () => {
           {/* Section header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm mb-6"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm text-sm mb-6 ${
+                isDark
+                  ? "bg-white/5 border border-white/10"
+                  : "bg-gray-100 border border-gray-200"
+              }`}
               style={{ color: "#3B9797" }}
             >
               Get to know me
             </motion.div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+            <h2
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
               About <span className="gradient-text">Me</span>
             </h2>
           </motion.div>
@@ -130,7 +140,11 @@ const About = () => {
                 </motion.div>
 
                 {/* Photo container */}
-                <div className="absolute inset-4 rounded-full overflow-hidden border-2 border-white/10">
+                <div
+                  className={`absolute inset-4 rounded-full overflow-hidden border-2 ${
+                    isDark ? "border-white/10" : "border-gray-200"
+                  }`}
+                >
                   {/* Replace this with your actual photo */}
                   <img
                     src={asset.photo}
@@ -190,23 +204,39 @@ const About = () => {
             {/* Text content */}
             <motion.div variants={itemVariants} className="space-y-6">
               <div className="space-y-4">
-                <h3 className="text-2xl md:text-3xl font-bold text-white">
+                <h3
+                  className={`text-2xl md:text-3xl font-bold ${
+                    isDark ? "text-white" : "text-gray-900"
+                  }`}
+                >
                   A passionate developer ready to make an impact
                 </h3>
-                <p className="text-gray-400 leading-relaxed">
+                <p
+                  className={`leading-relaxed ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
                   Hello! I'm a recent graduate with a deep passion for web
                   development and creating meaningful digital experiences. My
                   journey in tech started with curiosity and has grown into a
                   full-fledged commitment to building innovative solutions.
                 </p>
-                <p className="text-gray-400 leading-relaxed">
+                <p
+                  className={`leading-relaxed ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
                   During my academic journey, I've worked on various projects
                   that helped me develop strong problem-solving skills and a
                   keen eye for detail. I'm excited to bring my fresh
                   perspective, enthusiasm, and dedication to a team where I can
                   contribute and grow.
                 </p>
-                <p className="text-gray-400 leading-relaxed">
+                <p
+                  className={`leading-relaxed ${
+                    isDark ? "text-gray-400" : "text-gray-600"
+                  }`}
+                >
                   When I'm not coding, you'll find me exploring new
                   technologies, contributing to open-source projects, or
                   learning about the latest industry trends.
@@ -222,7 +252,11 @@ const About = () => {
                 ].map((stat) => (
                   <div
                     key={stat.label}
-                    className="text-center p-4 rounded-xl bg-white/5 border border-white/10"
+                    className={`text-center p-4 rounded-xl border ${
+                      isDark
+                        ? "bg-white/5 border-white/10"
+                        : "bg-gray-50 border-gray-200"
+                    }`}
                   >
                     <div
                       className="text-2xl md:text-3xl font-bold"
@@ -230,7 +264,11 @@ const About = () => {
                     >
                       {stat.value}
                     </div>
-                    <div className="text-gray-400 text-sm mt-1">
+                    <div
+                      className={`text-sm mt-1 ${
+                        isDark ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
                       {stat.label}
                     </div>
                   </div>

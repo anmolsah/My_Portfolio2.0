@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const Hero = () => {
+  const { isDark } = useTheme();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -120,7 +122,9 @@ const Hero = () => {
         {/* Main heading */}
         <motion.div variants={itemVariants}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-4 md:mb-6">
-            <span className="text-white">Hi, I'm </span>
+            <span className={isDark ? "text-white" : "text-gray-900"}>
+              Hi, I'm{" "}
+            </span>
             <span className="gradient-text text-glow">Anmol Sah</span>
           </h1>
         </motion.div>
@@ -132,7 +136,11 @@ const Hero = () => {
               className="w-5 h-5 md:w-6 md:h-6"
               style={{ color: "#BF092F" }}
             />
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-gray-200">
+            <h2
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium ${
+                isDark ? "text-gray-200" : "text-gray-700"
+              }`}
+            >
               Full Stack Developer
             </h2>
             <Sparkles
@@ -145,7 +153,9 @@ const Hero = () => {
         {/* Description */}
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed px-4"
+          className={`text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed px-4 ${
+            isDark ? "text-gray-400" : "text-gray-600"
+          }`}
         >
           I craft exceptional digital experiences with clean code and creative
           design. Passionate about building products that make a difference and
@@ -186,7 +196,11 @@ const Hero = () => {
 
           <motion.a
             href="#contact"
-            className="px-8 py-4 rounded-xl font-semibold text-white border border-white/20 transition-all duration-300 backdrop-blur-sm w-full sm:w-auto text-center hover:border-[#3B9797]/50 hover:bg-[#3B9797]/10"
+            className={`px-8 py-4 rounded-xl font-semibold border backdrop-blur-sm w-full sm:w-auto text-center transition-all duration-300 ${
+              isDark
+                ? "text-white border-white/20 hover:border-[#3B9797]/50 hover:bg-[#3B9797]/10"
+                : "text-gray-900 border-gray-300 hover:border-[#16476A]/50 hover:bg-[#16476A]/10"
+            }`}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -203,7 +217,11 @@ const Hero = () => {
             <motion.a
               key={social.label}
               href={social.href}
-              className="p-3 rounded-xl bg-white/5 border border-white/10 text-gray-400 transition-all duration-300 hover:text-[#3B9797] hover:bg-[#3B9797]/10 hover:border-[#3B9797]/30"
+              className={`p-3 rounded-xl border transition-all duration-300 hover:text-[#3B9797] hover:bg-[#3B9797]/10 hover:border-[#3B9797]/30 ${
+                isDark
+                  ? "bg-white/5 border-white/10 text-gray-400"
+                  : "bg-gray-100 border-gray-200 text-gray-600"
+              }`}
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
               initial={{ opacity: 0, y: 20 }}
@@ -232,7 +250,9 @@ const Hero = () => {
         }}
       >
         <motion.div
-          className="flex flex-col items-center gap-2 text-gray-500 hover:text-[#3B9797] transition-colors"
+          className={`flex flex-col items-center gap-2 hover:text-[#3B9797] transition-colors ${
+            isDark ? "text-gray-500" : "text-gray-400"
+          }`}
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >

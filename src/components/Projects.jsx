@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Folder } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const Projects = () => {
+  const { isDark } = useTheme();
   const projects = [
     {
       title: "NexoraAI",
@@ -44,7 +46,8 @@ const Projects = () => {
       title: "MOVIECO",
       description:
         "Movieco is a cutting-edge movie and TV show discovery platform that leverages artificial intelligence to provide personalized recommendations. Built with modern web technologies, it offers an intuitive and engaging experience for movie enthusiasts to discover, track, and manage their entertainment preferences.",
-      video: "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766994325/movieco_vid_pwelj5.mp4", // Replace with your Cloudinary video URL
+      video:
+        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766994325/movieco_vid_pwelj5.mp4", // Replace with your Cloudinary video URL
       tags: ["React", "Supabase", "TMDB API", "OpenRoueter API"],
       github: "https://github.com/anmolsah/movieco",
       live: "https://movieco-ubb9.vercel.app/",
@@ -115,16 +118,28 @@ const Projects = () => {
             className="text-center mb-16 md:mb-20"
           >
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm mb-6"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm text-sm mb-6 ${
+                isDark
+                  ? "bg-white/5 border border-white/10"
+                  : "bg-gray-100 border border-gray-200"
+              }`}
               style={{ color: "#3B9797" }}
             >
               <Folder className="w-4 h-4" />
               Featured Work
             </motion.div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h2
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
               Projects I've <span className="gradient-text">Built</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <p
+              className={`text-lg max-w-2xl mx-auto ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
               A selection of projects that showcase my passion for creating
               impactful digital experiences.
             </p>
@@ -201,16 +216,30 @@ const Projects = () => {
                     >
                       Featured Project
                     </p>
-                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+                    <h3
+                      className={`text-2xl md:text-3xl lg:text-4xl font-bold ${
+                        isDark ? "text-white" : "text-gray-900"
+                      }`}
+                    >
                       {project.title}
                     </h3>
                   </div>
 
                   <div
-                    className="p-6 rounded-xl backdrop-blur-sm border border-white/10"
-                    style={{ backgroundColor: "rgba(19, 36, 64, 0.5)" }}
+                    className={`p-6 rounded-xl backdrop-blur-sm border ${
+                      isDark ? "border-white/10" : "border-gray-200 shadow-lg"
+                    }`}
+                    style={{
+                      backgroundColor: isDark
+                        ? "rgba(19, 36, 64, 0.5)"
+                        : "rgba(255, 255, 255, 0.9)",
+                    }}
                   >
-                    <p className="text-gray-300 leading-relaxed">
+                    <p
+                      className={`leading-relaxed ${
+                        isDark ? "text-gray-300" : "text-gray-600"
+                      }`}
+                    >
                       {project.description}
                     </p>
                   </div>
@@ -220,7 +249,11 @@ const Projects = () => {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-sm rounded-full bg-white/5 border border-white/10 text-gray-300"
+                        className={`px-3 py-1 text-sm rounded-full border ${
+                          isDark
+                            ? "bg-white/5 border-white/10 text-gray-300"
+                            : "bg-gray-100 border-gray-200 text-gray-700"
+                        }`}
                       >
                         {tag}
                       </span>
@@ -231,7 +264,11 @@ const Projects = () => {
                   <div className="flex items-center gap-4 pt-2">
                     <motion.a
                       href={project.github}
-                      className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                      className={`flex items-center gap-2 transition-colors ${
+                        isDark
+                          ? "text-gray-400 hover:text-white"
+                          : "text-gray-600 hover:text-gray-900"
+                      }`}
                       whileHover={{ x: 4 }}
                     >
                       <Github className="w-5 h-5" />
@@ -256,7 +293,11 @@ const Projects = () => {
           <motion.div variants={itemVariants} className="text-center mt-20">
             <motion.a
               href="#"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white border border-white/20 hover:border-[#3B9797]/50 hover:bg-[#3B9797]/10 transition-all duration-300"
+              className={`inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold border transition-all duration-300 hover:border-[#3B9797]/50 hover:bg-[#3B9797]/10 ${
+                isDark
+                  ? "text-white border-white/20"
+                  : "text-gray-900 border-gray-300"
+              }`}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >

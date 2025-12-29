@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { Layers } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 const Skills = () => {
+  const { isDark } = useTheme();
   const skills = [
     {
       name: "React",
@@ -154,16 +156,28 @@ const Skills = () => {
           {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm text-sm mb-6"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm text-sm mb-6 ${
+                isDark
+                  ? "bg-white/5 border border-white/10"
+                  : "bg-gray-100 border border-gray-200"
+              }`}
               style={{ color: "#3B9797" }}
             >
               <Layers className="w-4 h-4" />
               My Expertise
             </motion.div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h2
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
               Skills & <span className="gradient-text">Technologies</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            <p
+              className={`text-lg max-w-2xl mx-auto ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
               Technologies I've been working with and continuously improving
             </p>
           </motion.div>
@@ -181,7 +195,13 @@ const Skills = () => {
                 whileHover={{ scale: 1.08, y: -10 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                <div className="relative p-4 md:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden transition-all duration-500 group-hover:border-white/25 group-hover:bg-white/[0.08]">
+                <div
+                  className={`relative p-4 md:p-6 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-500 ${
+                    isDark
+                      ? "bg-white/5 border-white/10 group-hover:border-white/25 group-hover:bg-white/[0.08]"
+                      : "bg-white border-gray-200 shadow-sm group-hover:border-gray-300 group-hover:shadow-md"
+                  }`}
+                >
                   {/* Glow on hover */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -204,7 +224,13 @@ const Skills = () => {
                         loading="lazy"
                       />
                     </motion.div>
-                    <span className="text-xs md:text-sm text-gray-400 group-hover:text-white transition-colors duration-300 text-center font-medium">
+                    <span
+                      className={`text-xs md:text-sm transition-colors duration-300 text-center font-medium ${
+                        isDark
+                          ? "text-gray-400 group-hover:text-white"
+                          : "text-gray-600 group-hover:text-gray-900"
+                      }`}
+                    >
                       {skill.name}
                     </span>
                   </div>
@@ -224,8 +250,14 @@ const Skills = () => {
           {/* Currently learning */}
           <motion.div variants={itemVariants} className="mt-20 text-center">
             <div
-              className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl border border-white/10"
-              style={{ backgroundColor: "rgba(19, 36, 64, 0.5)" }}
+              className={`inline-flex items-center gap-3 px-6 py-4 rounded-2xl border ${
+                isDark ? "border-white/10" : "border-gray-200"
+              }`}
+              style={{
+                backgroundColor: isDark
+                  ? "rgba(19, 36, 64, 0.5)"
+                  : "rgba(248, 250, 252, 0.9)",
+              }}
             >
               <div className="relative flex h-3 w-3">
                 <span
@@ -237,9 +269,13 @@ const Skills = () => {
                   style={{ backgroundColor: "#3B9797" }}
                 />
               </div>
-              <span className="text-gray-300">
+              <span className={isDark ? "text-gray-300" : "text-gray-600"}>
                 Currently learning:{" "}
-                <span className="text-white font-semibold">
+                <span
+                  className={`font-semibold ${
+                    isDark ? "text-white" : "text-gray-900"
+                  }`}
+                >
                   Typescript, GCP, System Design
                 </span>
               </span>

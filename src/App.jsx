@@ -4,10 +4,17 @@ import Projects from "./components/Projects";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
-const App = () => {
+const AppContent = () => {
+  const { isDark } = useTheme();
+
   return (
-    <main className="bg-[#0a0a0a] text-white">
+    <main
+      className={`${
+        isDark ? "bg-[#0a0a0a] text-white" : "bg-[#fafafa] text-gray-900"
+      } transition-colors duration-300`}
+    >
       <Navbar />
       <Hero />
       <Projects />
@@ -15,6 +22,14 @@ const App = () => {
       <Skills />
       <Contact />
     </main>
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 };
 

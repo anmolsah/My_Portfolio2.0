@@ -10,8 +10,10 @@ import {
 } from "lucide-react";
 import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { useTheme } from "../context/ThemeContext";
 
 const Contact = () => {
+  const { isDark } = useTheme();
   const formRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -55,7 +57,11 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/anmol-sah-551083238/", label: "LinkedIn" },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/anmol-sah-551083238/",
+      label: "LinkedIn",
+    },
     { icon: Twitter, href: "https://x.com/anni_i29", label: "Twitter" },
   ];
 
@@ -101,10 +107,18 @@ const Contact = () => {
         >
           {/* Header */}
           <motion.div variants={itemVariants} className="mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h2
+              className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
               Let's <span className="gradient-text">Connect</span>
             </h2>
-            <p className="text-gray-400 text-lg max-w-lg mx-auto">
+            <p
+              className={`text-lg max-w-lg mx-auto ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
               Have something in mind? I'd love to hear from you.
             </p>
           </motion.div>
@@ -113,7 +127,11 @@ const Contact = () => {
           <motion.a
             variants={itemVariants}
             href="mailto:your.email@example.com"
-            className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#3B9797]/30 transition-all duration-300 mb-12"
+            className={`inline-flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 mb-12 ${
+              isDark
+                ? "bg-white/5 border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#3B9797]/30"
+                : "bg-gray-100 border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-200 hover:border-[#3B9797]/30"
+            }`}
             whileHover={{ scale: 1.02 }}
           >
             <Mail className="w-5 h-5" style={{ color: "#3B9797" }} />
@@ -155,7 +173,11 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 placeholder="Name"
-                className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#3B9797]/50 focus:bg-white/[0.07] transition-all duration-300"
+                className={`w-full px-5 py-4 rounded-xl border transition-all duration-300 ${
+                  isDark
+                    ? "bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3B9797]/50 focus:bg-white/[0.07]"
+                    : "bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#3B9797]/50 focus:bg-gray-50 shadow-sm"
+                } focus:outline-none`}
               />
               <input
                 type="email"
@@ -164,7 +186,11 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 placeholder="Email"
-                className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#3B9797]/50 focus:bg-white/[0.07] transition-all duration-300"
+                className={`w-full px-5 py-4 rounded-xl border transition-all duration-300 ${
+                  isDark
+                    ? "bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3B9797]/50 focus:bg-white/[0.07]"
+                    : "bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#3B9797]/50 focus:bg-gray-50 shadow-sm"
+                } focus:outline-none`}
               />
             </div>
 
@@ -175,7 +201,11 @@ const Contact = () => {
               required
               rows={5}
               placeholder="Your message..."
-              className="w-full px-5 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-[#3B9797]/50 focus:bg-white/[0.07] transition-all duration-300 resize-none"
+              className={`w-full px-5 py-4 rounded-xl border transition-all duration-300 resize-none ${
+                isDark
+                  ? "bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3B9797]/50 focus:bg-white/[0.07]"
+                  : "bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#3B9797]/50 focus:bg-gray-50 shadow-sm"
+              } focus:outline-none`}
             />
 
             <motion.button
@@ -221,7 +251,11 @@ const Contact = () => {
               <motion.a
                 key={social.label}
                 href={social.href}
-                className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                className={`w-12 h-12 rounded-xl border flex items-center justify-center transition-all duration-300 ${
+                  isDark
+                    ? "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20"
+                    : "bg-gray-100 border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-200 hover:border-gray-300"
+                }`}
                 whileHover={{ y: -4 }}
                 aria-label={social.label}
               >
@@ -233,7 +267,9 @@ const Contact = () => {
           {/* Footer */}
           <motion.p
             variants={itemVariants}
-            className="mt-16 text-gray-600 text-sm"
+            className={`mt-16 text-sm ${
+              isDark ? "text-gray-600" : "text-gray-400"
+            }`}
           >
             © {new Date().getFullYear()} Anmol Sah
           </motion.p>
