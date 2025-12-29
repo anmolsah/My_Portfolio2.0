@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Folder } from "lucide-react";
-import { asset } from "../assets/assets";
 
 const Projects = () => {
   const projects = [
@@ -8,7 +7,8 @@ const Projects = () => {
       title: "NexoraAI",
       description:
         "NexoraAI is a comprehensive AI-powered content creation platform that provides users with a suite of intelligent tools to generate articles, create images, edit photos, and review resumes. Built with modern web technologies, it offers both free and premium tiers to cater to different user needs.",
-      image: asset.project1Image,
+      video:
+        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766993378/nexora_vid_fevuzg.mp4", // Replace with your Cloudinary video URL
       tags: [
         "React",
         "Node.js",
@@ -23,25 +23,31 @@ const Projects = () => {
       featured: true,
     },
     {
-      title: "Project Two",
+      title: "RAHI",
       description:
-        "Mobile-first e-commerce platform with seamless checkout experience, inventory management, and analytics dashboard.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
-      tags: ["Next.js", "Stripe", "PostgreSQL", "Tailwind"],
-      github: "#",
-      live: "#",
+        "RAHi is an intelligent travel planning application that uses AI to create personalized itineraries based on your preferences. Plan your perfect trip with comprehensive features including hotel recommendations, weather information, budget tracking, and much more!",
+      video:
+        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766993211/rahi_vid_ufg4qf.mp4",
+      tags: [
+        "React",
+        "OpenWeatherAPI",
+        "GeminiAPI",
+        "Firebase",
+        "Google Auth",
+        "Google Places API",
+      ],
+      github: "https://github.com/anmolsah/Traveler",
+      live: "https://traveler-chi.vercel.app/",
       featured: true,
     },
     {
-      title: "Project Three",
+      title: "MOVIECO",
       description:
-        "AI-powered productivity tool that helps teams collaborate efficiently with smart suggestions and automation.",
-      image:
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=500&fit=crop",
-      tags: ["Python", "FastAPI", "React", "OpenAI"],
-      github: "#",
-      live: "#",
+        "Movieco is a cutting-edge movie and TV show discovery platform that leverages artificial intelligence to provide personalized recommendations. Built with modern web technologies, it offers an intuitive and engaging experience for movie enthusiasts to discover, track, and manage their entertainment preferences.",
+      video: "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766994325/movieco_vid_pwelj5.mp4", // Replace with your Cloudinary video URL
+      tags: ["React", "Supabase", "TMDB API", "OpenRoueter API"],
+      github: "https://github.com/anmolsah/movieco",
+      live: "https://movieco-ubb9.vercel.app/",
       featured: true,
     },
   ];
@@ -134,33 +140,26 @@ const Projects = () => {
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 } gap-8 lg:gap-12 items-center`}
               >
-                {/* Project image */}
+                {/* Project video */}
                 <motion.div
                   className="w-full lg:w-3/5 relative group"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative overflow-hidden rounded-2xl">
-                    {/* Gradient overlay */}
-                    <div
-                      className="absolute inset-0 z-10 opacity-40 group-hover:opacity-20 transition-opacity duration-500"
-                      style={{
-                        background:
-                          "linear-gradient(135deg, rgba(19, 36, 64, 0.8), rgba(22, 71, 106, 0.6))",
-                      }}
-                    />
-
-                    {/* Image */}
-                    <motion.img
-                      src={project.image}
-                      alt={project.title}
+                    {/* Video */}
+                    <video
+                      src={project.video}
                       className="w-full aspect-video object-cover"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.6 }}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
                     />
 
                     {/* Hover overlay with links */}
-                    <div className="absolute inset-0 z-20 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 z-20 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
                       <motion.a
                         href={project.github}
                         className="p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-colors"
