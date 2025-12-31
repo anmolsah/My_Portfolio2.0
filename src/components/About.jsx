@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Code2, Rocket, Heart } from "lucide-react";
 import { asset } from "../assets/assets";
 import { useTheme } from "../context/ThemeContext";
 
@@ -28,39 +27,11 @@ const About = () => {
     },
   };
 
-  const highlights = [
-    {
-      icon: GraduationCap,
-      title: "Fresh Graduate",
-      description:
-        "Recently completed my degree with a strong foundation in computer science fundamentals.",
-    },
-    {
-      icon: Code2,
-      title: "Passionate Coder",
-      description:
-        "Love turning ideas into reality through clean, efficient code and modern technologies.",
-    },
-    {
-      icon: Rocket,
-      title: "Quick Learner",
-      description:
-        "Eager to learn new technologies and adapt quickly to challenging environments.",
-    },
-    {
-      icon: Heart,
-      title: "Team Player",
-      description:
-        "Collaborative mindset with excellent communication skills and positive attitude.",
-    },
-  ];
-
   return (
     <section
       id="about"
       className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full blur-[140px]"
@@ -88,7 +59,6 @@ const About = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Section header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <motion.div
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm text-sm mb-6 ${
@@ -109,9 +79,7 @@ const About = () => {
             </h2>
           </motion.div>
 
-          {/* Main content */}
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Photo section */}
             <motion.div
               variants={itemVariants}
               className="relative mx-auto lg:mx-0"
@@ -121,7 +89,6 @@ const About = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Decorative ring */}
                 <motion.div
                   className="absolute inset-0 rounded-full"
                   style={{
@@ -139,13 +106,11 @@ const About = () => {
                   <div className="w-full h-full rounded-full bg-[#0a0a0a]" />
                 </motion.div>
 
-                {/* Photo container */}
                 <div
                   className={`absolute inset-4 rounded-full overflow-hidden border-2 ${
                     isDark ? "border-white/10" : "border-gray-200"
                   }`}
                 >
-                  {/* Replace this with your actual photo */}
                   <img
                     src={asset.photo}
                     alt="Your Name"
@@ -155,7 +120,6 @@ const About = () => {
                       e.target.nextSibling.style.display = "flex";
                     }}
                   />
-                  {/* Placeholder - will show if image fails to load */}
                   <div
                     className="w-full h-full items-center justify-center text-6xl hidden"
                     style={{
@@ -167,7 +131,6 @@ const About = () => {
                   </div>
                 </div>
 
-                {/* Floating badges */}
                 <motion.div
                   className="absolute -top-2 -right-2 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10"
                   style={{ backgroundColor: "rgba(191, 9, 47, 0.9)" }}
@@ -201,7 +164,6 @@ const About = () => {
               </motion.div>
             </motion.div>
 
-            {/* Text content */}
             <motion.div variants={itemVariants} className="space-y-6">
               <div className="space-y-4">
                 <h3
@@ -243,7 +205,6 @@ const About = () => {
                 </p>
               </div>
 
-              {/* Quick stats */}
               <div className="grid grid-cols-3 gap-4 pt-4">
                 {[
                   { value: "15+", label: "Projects" },

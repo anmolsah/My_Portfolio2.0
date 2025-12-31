@@ -10,7 +10,7 @@ const Projects = () => {
       description:
         "NexoraAI is a comprehensive AI-powered content creation platform that provides users with a suite of intelligent tools to generate articles, create images, edit photos, and review resumes. Built with modern web technologies, it offers both free and premium tiers to cater to different user needs.",
       video:
-        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766993378/nexora_vid_fevuzg.mp4", // Replace with your Cloudinary video URL
+        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766993378/nexora_vid_fevuzg.mp4",
       tags: [
         "React",
         "Node.js",
@@ -47,7 +47,7 @@ const Projects = () => {
       description:
         "Movieco is a cutting-edge movie and TV show discovery platform that leverages artificial intelligence to provide personalized recommendations. Built with modern web technologies, it offers an intuitive and engaging experience for movie enthusiasts to discover, track, and manage their entertainment preferences.",
       video:
-        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766994325/movieco_vid_pwelj5.mp4", // Replace with your Cloudinary video URL
+        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1766994325/movieco_vid_pwelj5.mp4",
       tags: ["React", "Supabase", "TMDB API", "OpenRoueter API"],
       github: "https://github.com/anmolsah/movieco",
       live: "https://movieco-ubb9.vercel.app/",
@@ -83,7 +83,6 @@ const Projects = () => {
       id="projects"
       className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full blur-[150px]"
@@ -112,7 +111,6 @@ const Projects = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Section header */}
           <motion.div
             variants={itemVariants}
             className="text-center mb-16 md:mb-20"
@@ -145,7 +143,6 @@ const Projects = () => {
             </p>
           </motion.div>
 
-          {/* Projects grid */}
           <div className="space-y-20 md:space-y-32">
             {projects.map((project, index) => (
               <motion.div
@@ -155,14 +152,12 @@ const Projects = () => {
                   index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                 } gap-8 lg:gap-12 items-center`}
               >
-                {/* Project video */}
                 <motion.div
                   className="w-full lg:w-3/5 relative group"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative overflow-hidden rounded-2xl">
-                    {/* Video */}
                     <video
                       src={project.video}
                       className="w-full aspect-video object-cover"
@@ -173,7 +168,6 @@ const Projects = () => {
                       preload="metadata"
                     />
 
-                    {/* Hover overlay with links */}
                     <div className="absolute inset-0 z-20 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40">
                       <motion.a
                         href={project.github}
@@ -197,7 +191,6 @@ const Projects = () => {
                     </div>
                   </div>
 
-                  {/* Decorative border */}
                   <div
                     className="absolute -inset-1 rounded-2xl -z-10 opacity-50 blur-sm"
                     style={{
@@ -207,7 +200,6 @@ const Projects = () => {
                   />
                 </motion.div>
 
-                {/* Project info */}
                 <div className="w-full lg:w-2/5 space-y-6">
                   <div>
                     <p
@@ -244,7 +236,6 @@ const Projects = () => {
                     </p>
                   </div>
 
-                  {/* Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
@@ -260,7 +251,6 @@ const Projects = () => {
                     ))}
                   </div>
 
-                  {/* Links */}
                   <div className="flex items-center gap-4 pt-2">
                     <motion.a
                       href={project.github}
@@ -289,7 +279,6 @@ const Projects = () => {
             ))}
           </div>
 
-          {/* View all projects button */}
           <motion.div variants={itemVariants} className="text-center mt-20">
             <motion.a
               href="#"

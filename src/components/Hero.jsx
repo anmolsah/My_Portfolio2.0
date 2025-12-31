@@ -51,7 +51,6 @@ const Hero = () => {
 
   return (
     <section className="section-snap relative min-h-screen flex items-center justify-center overflow-hidden grid-bg noise-overlay">
-      {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px]"
@@ -82,7 +81,6 @@ const Hero = () => {
         />
       </div>
 
-      {/* Floating decorative elements */}
       <motion.div
         className="absolute top-20 right-20 md:right-40"
         variants={floatingVariants}
@@ -112,14 +110,12 @@ const Hero = () => {
         />
       </motion.div>
 
-      {/* Main content */}
       <motion.div
         className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Main heading */}
         <motion.div variants={itemVariants}>
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-4 md:mb-6">
             <span className={isDark ? "text-white" : "text-gray-900"}>
@@ -129,7 +125,6 @@ const Hero = () => {
           </h1>
         </motion.div>
 
-        {/* Role/Title */}
         <motion.div variants={itemVariants} className="mb-6 md:mb-8">
           <div className="inline-flex items-center gap-3">
             <Sparkles
@@ -150,7 +145,6 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Description */}
         <motion.p
           variants={itemVariants}
           className={`text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed px-4 ${
@@ -162,7 +156,6 @@ const Hero = () => {
           contributing to open source projects.
         </motion.p>
 
-        {/* CTA Buttons */}
         <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12 md:mb-16"
@@ -208,7 +201,6 @@ const Hero = () => {
           </motion.a>
         </motion.div>
 
-        {/* Social links */}
         <motion.div
           variants={itemVariants}
           className="flex items-center justify-center gap-4"
@@ -235,7 +227,6 @@ const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.a
         href="#projects"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"

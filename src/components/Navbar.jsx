@@ -39,7 +39,6 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
           <motion.a
             href="#"
             className={`text-xl md:text-2xl font-bold ${
@@ -52,7 +51,6 @@ const Navbar = () => {
             <span style={{ color: "#BF092F" }}>{"/>"}</span>
           </motion.a>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <motion.a
@@ -69,7 +67,6 @@ const Navbar = () => {
               </motion.a>
             ))}
 
-            {/* Theme toggle */}
             <motion.button
               onClick={toggleTheme}
               className={`ml-2 p-2.5 rounded-lg transition-all duration-300 ${
@@ -101,7 +98,6 @@ const Navbar = () => {
             </motion.a>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-2">
             <motion.button
               onClick={toggleTheme}
@@ -138,7 +134,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div

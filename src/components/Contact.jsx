@@ -87,7 +87,6 @@ const Contact = () => {
       id="contact"
       className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[200px]"
@@ -105,7 +104,6 @@ const Contact = () => {
           viewport={{ once: true, margin: "-100px" }}
           className="text-center"
         >
-          {/* Header */}
           <motion.div variants={itemVariants} className="mb-12">
             <h2
               className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 ${
@@ -123,10 +121,9 @@ const Contact = () => {
             </p>
           </motion.div>
 
-          {/* Email link */}
           <motion.a
             variants={itemVariants}
-            href="mailto:your.email@example.com"
+            href="mailto:annifind010@gmail.com"
             className={`inline-flex items-center gap-3 px-6 py-3 rounded-full border transition-all duration-300 mb-12 ${
               isDark
                 ? "bg-white/5 border-white/10 text-gray-300 hover:text-white hover:bg-white/10 hover:border-[#3B9797]/30"
@@ -135,10 +132,9 @@ const Contact = () => {
             whileHover={{ scale: 1.02 }}
           >
             <Mail className="w-5 h-5" style={{ color: "#3B9797" }} />
-            <span>your.email@example.com</span>
+            <span>annifind010@gmail.com</span>
           </motion.a>
 
-          {/* Status message */}
           {status.message && (
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -158,7 +154,6 @@ const Contact = () => {
             </motion.div>
           )}
 
-          {/* Form */}
           <motion.form
             ref={formRef}
             variants={itemVariants}
@@ -242,7 +237,6 @@ const Contact = () => {
             </motion.button>
           </motion.form>
 
-          {/* Social links */}
           <motion.div
             variants={itemVariants}
             className="mt-12 flex justify-center gap-4"
@@ -264,7 +258,6 @@ const Contact = () => {
             ))}
           </motion.div>
 
-          {/* Footer */}
           <motion.p
             variants={itemVariants}
             className={`mt-16 text-sm ${

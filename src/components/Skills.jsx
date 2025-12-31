@@ -65,7 +65,6 @@ const Skills = () => {
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
       color: "#2496ED",
     },
-
     {
       name: "Firebase",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
@@ -130,7 +129,6 @@ const Skills = () => {
       id="skills"
       className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
-      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-[150px]"
@@ -153,7 +151,6 @@ const Skills = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <motion.div
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm text-sm mb-6 ${
@@ -182,7 +179,6 @@ const Skills = () => {
             </p>
           </motion.div>
 
-          {/* Skills grid */}
           <motion.div
             variants={containerVariants}
             className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 md:gap-6"
@@ -202,7 +198,6 @@ const Skills = () => {
                       : "bg-white border-gray-200 shadow-sm group-hover:border-gray-300 group-hover:shadow-md"
                   }`}
                 >
-                  {/* Glow on hover */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
@@ -210,7 +205,6 @@ const Skills = () => {
                     }}
                   />
 
-                  {/* Logo */}
                   <div className="relative flex flex-col items-center gap-3">
                     <motion.div
                       className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center"
@@ -235,7 +229,6 @@ const Skills = () => {
                     </span>
                   </div>
 
-                  {/* Bottom glow line */}
                   <div
                     className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
@@ -247,7 +240,6 @@ const Skills = () => {
             ))}
           </motion.div>
 
-          {/* Currently learning */}
           <motion.div variants={itemVariants} className="mt-20 text-center">
             <div
               className={`inline-flex items-center gap-3 px-6 py-4 rounded-2xl border ${
