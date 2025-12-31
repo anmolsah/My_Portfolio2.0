@@ -25,6 +25,17 @@ const Projects = () => {
       featured: true,
     },
     {
+      title: "THUMBGEN",
+      description:
+        "AI-Powered Thumbnail Generator for Content Creators.",
+      video:
+        "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1767188529/thumgen_vid_mxaktz.mp4",
+      tags: ["React", "Mongodb", "Expressjs", "Nodejs", "Typescript", "Imagen 4.0 & Gemini", "Cashfree Payemnt", "Cloudinary","Brevo"],
+      github: "https://github.com/anmolsah/ThumbGen.ai",
+      live: "https://thumb-gen-ai-pink.vercel.app/",
+      featured: true,
+    },
+    {
       title: "RAHI",
       description:
         "RAHi is an intelligent travel planning application that uses AI to create personalized itineraries based on your preferences. Plan your perfect trip with comprehensive features including hotel recommendations, weather information, budget tracking, and much more!",
