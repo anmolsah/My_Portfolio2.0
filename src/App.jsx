@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Projects from "./components/Projects";
 import About from "./components/About";
+import GitHubGraph from "./components/GitHubGraph";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
@@ -19,6 +20,7 @@ const AppContent = () => {
       <Hero />
       <Projects />
       <About />
+      <GitHubGraph />
       <Skills />
       <Contact />
     </main>
