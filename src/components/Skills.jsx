@@ -1,128 +1,176 @@
 import { motion } from "framer-motion";
 import { Layers } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { memo, useMemo } from "react";
+
+const skills = [
+  {
+    name: "React",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    color: "#61DAFB",
+  },
+  {
+    name: "JavaScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    color: "#F7DF1E",
+  },
+  {
+    name: "TypeScript",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    color: "#3178C6",
+  },
+  {
+    name: "Node.js",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    color: "#339933",
+  },
+  {
+    name: "C++",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
+    color: "#00599C",
+  },
+  {
+    name: "Supabase",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
+    color: "#3ECF8E",
+  },
+  {
+    name: "GitHub",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+    color: "#ffffff",
+  },
+  {
+    name: "MongoDB",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    color: "#47A248",
+  },
+  {
+    name: "PostgreSQL",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    color: "#4169E1",
+  },
+  {
+    name: "Tailwind",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+    color: "#06B6D4",
+  },
+  {
+    name: "Git",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    color: "#F05032",
+  },
+  {
+    name: "Docker",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    color: "#2496ED",
+  },
+  {
+    name: "Firebase",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+    color: "#FFCA28",
+  },
+  {
+    name: "Redux",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+    color: "#764ABC",
+  },
+  {
+    name: "Express",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+    color: "#ffffff",
+  },
+  {
+    name: "Postman",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+    color: "#FF6C37",
+  },
+  {
+    name: "HTML5",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    color: "#E34F26",
+  },
+  {
+    name: "CSS3",
+    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    color: "#1572B6",
+  },
+];
+
+const SkillCard = memo(({ skill, isDark }) => (
+  <motion.div
+    className="group relative"
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.4 }}
+    whileHover={{ scale: 1.05, y: -5 }}
+  >
+    <div
+      className={`relative p-4 md:p-6 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-300 ${
+        isDark
+          ? "bg-white/5 border-white/10 group-hover:border-white/25 group-hover:bg-white/[0.08]"
+          : "bg-white border-gray-200 shadow-sm group-hover:border-gray-300 group-hover:shadow-md"
+      }`}
+    >
+      <div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle at center, ${skill.color}15 0%, transparent 70%)`,
+        }}
+      />
+
+      <div className="relative flex flex-col items-center gap-3">
+        <div className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center">
+          <img
+            src={skill.logo}
+            alt={skill.name}
+            className="w-full h-full object-contain drop-shadow-lg"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <span
+          className={`text-xs md:text-sm transition-colors duration-300 text-center font-medium ${
+            isDark
+              ? "text-gray-400 group-hover:text-white"
+              : "text-gray-600 group-hover:text-gray-900"
+          }`}
+        >
+          {skill.name}
+        </span>
+      </div>
+
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${skill.color}, transparent)`,
+        }}
+      />
+    </div>
+  </motion.div>
+));
+
+SkillCard.displayName = 'SkillCard';
 
 const Skills = () => {
   const { isDark } = useTheme();
-  const skills = [
-    {
-      name: "React",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-      color: "#61DAFB",
-    },
-    {
-      name: "JavaScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-      color: "#F7DF1E",
-    },
-    {
-      name: "TypeScript",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-      color: "#3178C6",
-    },
-    {
-      name: "Node.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-      color: "#339933",
-    },
-    {
-      name: "C++",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg",
-      color: "#00599C",
-    },
-    {
-      name: "Supabase",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg",
-      color: "#3ECF8E",
-    },
-    {
-      name: "GitHub",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-      color: "#ffffff",
-    },
-    {
-      name: "MongoDB",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-      color: "#47A248",
-    },
-    {
-      name: "PostgreSQL",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-      color: "#4169E1",
-    },
-    {
-      name: "Tailwind",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-      color: "#06B6D4",
-    },
-    {
-      name: "Git",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-      color: "#F05032",
-    },
-    {
-      name: "Docker",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-      color: "#2496ED",
-    },
-    {
-      name: "Firebase",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
-      color: "#FFCA28",
-    },
-    {
-      name: "Redux",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
-      color: "#764ABC",
-    },
-    {
-      name: "Express",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-      color: "#ffffff",
-    },
-    {
-      name: "Postman",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-      color: "#FF6C37",
-    },
-    {
-      name: "HTML5",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-      color: "#E34F26",
-    },
-    {
-      name: "CSS3",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-      color: "#1572B6",
-    },
-  ];
 
-  const containerVariants = {
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.08, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.05, delayChildren: 0.15 },
     },
-  };
+  }), []);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+  const itemVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.8, rotateY: -30 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      rotateY: 0,
       transition: { duration: 0.5, ease: "easeOut" },
     },
-  };
+  }), []);
 
   return (
     <section
@@ -130,17 +178,13 @@ const Skills = () => {
       className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-0 right-1/4 w-[500px] h-[500px] rounded-full blur-[150px]"
-          style={{ backgroundColor: "rgba(22, 71, 106, 0.15)" }}
-          animate={{ scale: [1, 1.15, 1], y: [0, 30, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute top-0 right-1/4 w-[400px] h-[400px] rounded-full blur-[50px] opacity-15"
+          style={{ backgroundColor: "rgba(22, 71, 106, 0.4)" }}
         />
-        <motion.div
-          className="absolute bottom-1/4 left-0 w-[400px] h-[400px] rounded-full blur-[120px]"
-          style={{ backgroundColor: "rgba(59, 151, 151, 0.12)" }}
-          animate={{ scale: [1.1, 1, 1.1], x: [-20, 20, -20] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute bottom-1/4 left-0 w-[350px] h-[350px] rounded-full blur-[45px] opacity-15"
+          style={{ backgroundColor: "rgba(59, 151, 151, 0.3)" }}
         />
       </div>
 
@@ -152,7 +196,7 @@ const Skills = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <motion.div
+            <div
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm text-sm mb-6 ${
                 isDark
                   ? "bg-white/5 border border-white/10"
@@ -162,7 +206,7 @@ const Skills = () => {
             >
               <Layers className="w-4 h-4" />
               My Expertise
-            </motion.div>
+            </div>
             <h2
               className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 ${
                 isDark ? "text-white" : "text-gray-900"
@@ -179,66 +223,11 @@ const Skills = () => {
             </p>
           </motion.div>
 
-          <motion.div
-            variants={containerVariants}
-            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 md:gap-6"
-          >
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 md:gap-6">
             {skills.map((skill) => (
-              <motion.div
-                key={skill.name}
-                variants={cardVariants}
-                className="group relative"
-                whileHover={{ scale: 1.08, y: -10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <div
-                  className={`relative p-4 md:p-6 rounded-2xl border backdrop-blur-sm overflow-hidden transition-all duration-500 ${
-                    isDark
-                      ? "bg-white/5 border-white/10 group-hover:border-white/25 group-hover:bg-white/[0.08]"
-                      : "bg-white border-gray-200 shadow-sm group-hover:border-gray-300 group-hover:shadow-md"
-                  }`}
-                >
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `radial-gradient(circle at center, ${skill.color}20 0%, transparent 70%)`,
-                    }}
-                  />
-
-                  <div className="relative flex flex-col items-center gap-3">
-                    <motion.div
-                      className="w-12 h-12 md:w-16 md:h-16 flex items-center justify-center"
-                      whileHover={{ rotateY: 360 }}
-                      transition={{ duration: 0.6, ease: "easeInOut" }}
-                    >
-                      <img
-                        src={skill.logo}
-                        alt={skill.name}
-                        className="w-full h-full object-contain drop-shadow-lg"
-                        loading="lazy"
-                      />
-                    </motion.div>
-                    <span
-                      className={`text-xs md:text-sm transition-colors duration-300 text-center font-medium ${
-                        isDark
-                          ? "text-gray-400 group-hover:text-white"
-                          : "text-gray-600 group-hover:text-gray-900"
-                      }`}
-                    >
-                      {skill.name}
-                    </span>
-                  </div>
-
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `linear-gradient(90deg, transparent, ${skill.color}, transparent)`,
-                    }}
-                  />
-                </div>
-              </motion.div>
+              <SkillCard key={skill.name} skill={skill} isDark={isDark} />
             ))}
-          </motion.div>
+          </div>
 
           <motion.div variants={itemVariants} className="mt-20 text-center">
             <div

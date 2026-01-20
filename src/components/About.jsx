@@ -1,31 +1,65 @@
 import { motion } from "framer-motion";
 import { asset } from "../assets/assets";
 import { useTheme } from "../context/ThemeContext";
+import { memo, useMemo } from "react";
+
+const stats = [
+  { value: "15+", label: "Projects" },
+  { value: "10+", label: "Technologies" },
+  { value: "100%", label: "Dedication" },
+];
+
+const StatCard = memo(({ stat, isDark }) => (
+  <div
+    className={`text-center p-4 rounded-xl border ${
+      isDark
+        ? "bg-white/5 border-white/10"
+        : "bg-gray-50 border-gray-200"
+    }`}
+  >
+    <div
+      className="text-2xl md:text-3xl font-bold"
+      style={{ color: "#3B9797" }}
+    >
+      {stat.value}
+    </div>
+    <div
+      className={`text-sm mt-1 ${
+        isDark ? "text-gray-400" : "text-gray-600"
+      }`}
+    >
+      {stat.label}
+    </div>
+  </div>
+));
+
+StatCard.displayName = 'StatCard';
 
 const About = () => {
   const { isDark } = useTheme();
-  const containerVariants = {
+
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
+        staggerChildren: 0.12,
+        delayChildren: 0.15,
       },
     },
-  };
+  }), []);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+  const itemVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        duration: 0.6,
+        ease: "easeOut",
       },
     },
-  };
+  }), []);
 
   return (
     <section
@@ -33,22 +67,13 @@ const About = () => {
       className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full blur-[140px]"
-          style={{ backgroundColor: "rgba(59, 151, 151, 0.12)" }}
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [-20, 20, -20],
-          }}
-          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute top-1/4 left-0 w-[400px] h-[400px] rounded-full blur-[50px] opacity-15"
+          style={{ backgroundColor: "rgba(59, 151, 151, 0.3)" }}
         />
-        <motion.div
-          className="absolute bottom-1/4 right-0 w-[400px] h-[400px] rounded-full blur-[120px]"
-          style={{ backgroundColor: "rgba(191, 9, 47, 0.1)" }}
-          animate={{
-            scale: [1.1, 1, 1.1],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute bottom-1/4 right-0 w-[350px] h-[350px] rounded-full blur-[45px] opacity-15"
+          style={{ backgroundColor: "rgba(191, 9, 47, 0.25)" }}
         />
       </div>
 
@@ -60,7 +85,7 @@ const About = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div variants={itemVariants} className="text-center mb-16">
-            <motion.div
+            <div
               className={`inline-flex items-center gap-2 px-4 py-2 rounded-full backdrop-blur-sm text-sm mb-6 ${
                 isDark
                   ? "bg-white/5 border border-white/10"
@@ -69,7 +94,7 @@ const About = () => {
               style={{ color: "#3B9797" }}
             >
               Get to know me
-            </motion.div>
+            </div>
             <h2
               className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold ${
                 isDark ? "text-white" : "text-gray-900"
@@ -84,27 +109,17 @@ const About = () => {
               variants={itemVariants}
               className="relative mx-auto lg:mx-0"
             >
-              <motion.div
-                className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <motion.div
+              <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96">
+                <div
                   className="absolute inset-0 rounded-full"
                   style={{
                     background:
                       "linear-gradient(135deg, #BF092F, #16476A, #3B9797)",
                     padding: "3px",
                   }}
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 20,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
                 >
-                  <div className="w-full h-full rounded-full bg-[#0a0a0a]" />
-                </motion.div>
+                  <div className={`w-full h-full rounded-full ${isDark ? 'bg-[#0a0a0a]' : 'bg-[#fafafa]'}`} />
+                </div>
 
                 <div
                   className={`absolute inset-4 rounded-full overflow-hidden border-2 ${
@@ -113,8 +128,9 @@ const About = () => {
                 >
                   <img
                     src={asset.photo}
-                    alt="Your Name"
+                    alt="Anmol Sah"
                     className="w-full h-full object-cover"
+                    loading="lazy"
                     onError={(e) => {
                       e.target.style.display = "none";
                       e.target.nextSibling.style.display = "flex";
@@ -131,37 +147,27 @@ const About = () => {
                   </div>
                 </div>
 
-                <motion.div
-                  className="absolute -top-2 -right-2 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10"
+                <div
+                  className="absolute -top-2 -right-2 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10 animate-float"
                   style={{ backgroundColor: "rgba(191, 9, 47, 0.9)" }}
-                  animate={{ y: [-5, 5, -5] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
                 >
                   <span className="text-white font-semibold text-sm">
                     Open to Work
                   </span>
-                </motion.div>
+                </div>
 
-                <motion.div
-                  className="absolute -bottom-2 -left-2 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10"
-                  style={{ backgroundColor: "rgba(59, 151, 151, 0.9)" }}
-                  animate={{ y: [5, -5, 5] }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 1,
+                <div
+                  className="absolute -bottom-2 -left-2 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10 animate-float"
+                  style={{ 
+                    backgroundColor: "rgba(59, 151, 151, 0.9)",
+                    animationDelay: "1s"
                   }}
                 >
                   <span className="text-white font-semibold text-sm">
                     Fresher 2025
                   </span>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             </motion.div>
 
             <motion.div variants={itemVariants} className="space-y-6">
@@ -206,33 +212,8 @@ const About = () => {
               </div>
 
               <div className="grid grid-cols-3 gap-4 pt-4">
-                {[
-                  { value: "15+", label: "Projects" },
-                  { value: "10+", label: "Technologies" },
-                  { value: "100%", label: "Dedication" },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className={`text-center p-4 rounded-xl border ${
-                      isDark
-                        ? "bg-white/5 border-white/10"
-                        : "bg-gray-50 border-gray-200"
-                    }`}
-                  >
-                    <div
-                      className="text-2xl md:text-3xl font-bold"
-                      style={{ color: "#3B9797" }}
-                    >
-                      {stat.value}
-                    </div>
-                    <div
-                      className={`text-sm mt-1 ${
-                        isDark ? "text-gray-400" : "text-gray-600"
-                      }`}
-                    >
-                      {stat.label}
-                    </div>
-                  </div>
+                {stats.map((stat) => (
+                  <StatCard key={stat.label} stat={stat} isDark={isDark} />
                 ))}
               </div>
             </motion.div>

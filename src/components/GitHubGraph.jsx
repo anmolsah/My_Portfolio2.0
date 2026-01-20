@@ -1,20 +1,39 @@
 import { motion } from "framer-motion";
 import { Github } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { memo, useMemo } from "react";
+
+const LegendIndicator = memo(({ opacity, isDark }) => (
+  <div
+    className="w-3 h-3 rounded-sm"
+    style={{
+      backgroundColor: isDark
+        ? `rgba(59, 151, 151, ${opacity})`
+        : `rgba(22, 71, 106, ${opacity})`,
+    }}
+  />
+));
+
+LegendIndicator.displayName = 'LegendIndicator';
 
 const GitHubGraph = () => {
   const { isDark } = useTheme();
   const username = "anmolsah";
   
-  const darkThemeUrl = `https://ghchart.rshah.org/3B9797/${username}`;
-  const lightThemeUrl = `https://ghchart.rshah.org/16476A/${username}`;
+  const graphUrl = useMemo(() => 
+    isDark 
+      ? `https://ghchart.rshah.org/3B9797/${username}`
+      : `https://ghchart.rshah.org/16476A/${username}`
+  , [isDark]);
+
+  const opacityLevels = useMemo(() => [0.1, 0.3, 0.5, 0.7, 1], []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
     >
       <div
@@ -52,9 +71,11 @@ const GitHubGraph = () => {
         <div className="overflow-x-auto scrollbar-hide">
           <div className="min-w-[750px]">
             <img
-              src={isDark ? darkThemeUrl : lightThemeUrl}
+              src={graphUrl}
               alt="GitHub Contribution Graph"
               className="w-full h-auto"
+              loading="lazy"
+              decoding="async"
               style={{
                 filter: isDark ? "brightness(1)" : "brightness(0.95)",
               }}
@@ -64,25 +85,13 @@ const GitHubGraph = () => {
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className={`text-sm ${isDark ? "text-gray-500" : "text-gray-500"}`}>
-              Less
-            </span>
+            <span className="text-sm text-gray-500">Less</span>
             <div className="flex gap-1">
-              {[0.1, 0.3, 0.5, 0.7, 1].map((opacity, i) => (
-                <div
-                  key={i}
-                  className="w-3 h-3 rounded-sm"
-                  style={{
-                    backgroundColor: isDark
-                      ? `rgba(59, 151, 151, ${opacity})`
-                      : `rgba(22, 71, 106, ${opacity})`,
-                  }}
-                />
+              {opacityLevels.map((opacity, i) => (
+                <LegendIndicator key={i} opacity={opacity} isDark={isDark} />
               ))}
             </div>
-            <span className={`text-sm ${isDark ? "text-gray-500" : "text-gray-500"}`}>
-              More
-            </span>
+            <span className="text-sm text-gray-500">More</span>
           </div>
 
           <motion.a

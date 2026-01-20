@@ -1,41 +1,92 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo, useCallback, useMemo } from "react";
 import { useTheme } from "../context/ThemeContext";
+
+const navLinks = [
+  { name: "Home", href: "#" },
+  { name: "Projects", href: "#projects" },
+  { name: "About", href: "#about" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact", href: "#contact" },
+];
+
+const NavLink = memo(({ link, isDark }) => (
+  <motion.a
+    href={link.href}
+    className={`px-4 py-2 text-sm rounded-lg transition-all duration-300 ${
+      isDark
+        ? "text-gray-400 hover:text-white hover:bg-white/5"
+        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+    }`}
+    whileHover={{ y: -2 }}
+  >
+    {link.name}
+  </motion.a>
+));
+
+NavLink.displayName = 'NavLink';
+
+const MobileNavLink = memo(({ link, isDark, onClick, index }) => (
+  <motion.a
+    href={link.href}
+    className={`block px-4 py-3 rounded-lg transition-all ${
+      isDark
+        ? "text-gray-400 hover:text-white hover:bg-white/5"
+        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
+    }`}
+    onClick={onClick}
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: index * 0.05 }}
+  >
+    {link.name}
+  </motion.a>
+));
+
+MobileNavLink.displayName = 'MobileNavLink';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { isDark, toggleTheme } = useTheme();
 
-  const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Projects", href: "#projects" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" },
-  ];
-
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const closeMenu = useCallback(() => setIsOpen(false), []);
+  const toggleMenu = useCallback(() => setIsOpen(prev => !prev), []);
+
+  const navbarClasses = useMemo(() => 
+    `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled
+        ? isDark
+          ? "bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5"
+          : "bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm"
+        : ""
+    }`
+  , [scrolled, isDark]);
+
   return (
     <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? isDark
-            ? "bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5"
-            : "bg-white/80 backdrop-blur-xl border-b border-gray-200/50 shadow-sm"
-          : ""
-      }`}
+      className={navbarClasses}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -53,18 +104,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                className={`px-4 py-2 text-sm rounded-lg transition-all duration-300 ${
-                  isDark
-                    ? "text-gray-400 hover:text-white hover:bg-white/5"
-                    : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                }`}
-                whileHover={{ y: -2 }}
-              >
-                {link.name}
-              </motion.a>
+              <NavLink key={link.name} link={link} isDark={isDark} />
             ))}
 
             <motion.button
@@ -121,8 +161,9 @@ const Navbar = () => {
                   ? "text-gray-400 hover:text-white"
                   : "text-gray-600 hover:text-gray-900"
               }`}
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={toggleMenu}
               whileTap={{ scale: 0.95 }}
+              aria-label="Toggle menu"
             >
               {isOpen ? (
                 <X className="w-6 h-6" />
@@ -145,25 +186,17 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
           >
             <div className="px-4 py-4 space-y-1">
               {navLinks.map((link, index) => (
-                <motion.a
+                <MobileNavLink
                   key={link.name}
-                  href={link.href}
-                  className={`block px-4 py-3 rounded-lg transition-all ${
-                    isDark
-                      ? "text-gray-400 hover:text-white hover:bg-white/5"
-                      : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  {link.name}
-                </motion.a>
+                  link={link}
+                  isDark={isDark}
+                  onClick={closeMenu}
+                  index={index}
+                />
               ))}
               <motion.a
                 href="#contact"
@@ -171,7 +204,7 @@ const Navbar = () => {
                 style={{
                   background: "linear-gradient(135deg, #BF092F, #16476A)",
                 }}
-                onClick={() => setIsOpen(false)}
+                onClick={closeMenu}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.05 }}

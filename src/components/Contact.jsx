@@ -8,9 +8,38 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
-import { useState, useRef } from "react";
+import { useState, useRef, memo, useMemo, useCallback } from "react";
 import emailjs from "@emailjs/browser";
 import { useTheme } from "../context/ThemeContext";
+
+const socialLinks = [
+  { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/anmol-sah-551083238/",
+    label: "LinkedIn",
+  },
+  { icon: Twitter, href: "https://x.com/anni_i29", label: "Twitter" },
+];
+
+const SocialLink = memo(({ social, isDark }) => (
+  <motion.a
+    href={social.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`w-12 h-12 rounded-xl border flex items-center justify-center transition-all duration-300 ${
+      isDark
+        ? "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20"
+        : "bg-gray-100 border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-200 hover:border-gray-300"
+    }`}
+    whileHover={{ y: -4 }}
+    aria-label={social.label}
+  >
+    <social.icon className="w-5 h-5" />
+  </motion.a>
+));
+
+SocialLink.displayName = 'SocialLink';
 
 const Contact = () => {
   const { isDark } = useTheme();
@@ -23,11 +52,12 @@ const Contact = () => {
   const [status, setStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus({ type: "", message: "" });
@@ -53,34 +83,32 @@ const Contact = () => {
       setIsSubmitting(false);
       setTimeout(() => setStatus({ type: "", message: "" }), 5000);
     }
-  };
+  }, []);
 
-  const socialLinks = [
-    { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/anmol-sah-551083238/",
-      label: "LinkedIn",
-    },
-    { icon: Twitter, href: "https://x.com/anni_i29", label: "Twitter" },
-  ];
-
-  const containerVariants = {
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.08, delayChildren: 0.15 },
     },
-  };
+  }), []);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+  const itemVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
-  };
+  }), []);
+
+  const inputClasses = useMemo(() => 
+    `w-full px-5 py-4 rounded-xl border transition-all duration-300 ${
+      isDark
+        ? "bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3B9797]/50 focus:bg-white/[0.07]"
+        : "bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#3B9797]/50 focus:bg-gray-50 shadow-sm"
+    } focus:outline-none`
+  , [isDark]);
 
   return (
     <section
@@ -88,11 +116,9 @@ const Contact = () => {
       className="section-snap relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full blur-[200px]"
-          style={{ backgroundColor: "rgba(22, 71, 106, 0.15)" }}
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[60px] opacity-15"
+          style={{ backgroundColor: "rgba(22, 71, 106, 0.4)" }}
         />
       </div>
 
@@ -168,11 +194,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 placeholder="Name"
-                className={`w-full px-5 py-4 rounded-xl border transition-all duration-300 ${
-                  isDark
-                    ? "bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3B9797]/50 focus:bg-white/[0.07]"
-                    : "bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#3B9797]/50 focus:bg-gray-50 shadow-sm"
-                } focus:outline-none`}
+                className={inputClasses}
               />
               <input
                 type="email"
@@ -181,11 +203,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 placeholder="Email"
-                className={`w-full px-5 py-4 rounded-xl border transition-all duration-300 ${
-                  isDark
-                    ? "bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3B9797]/50 focus:bg-white/[0.07]"
-                    : "bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#3B9797]/50 focus:bg-gray-50 shadow-sm"
-                } focus:outline-none`}
+                className={inputClasses}
               />
             </div>
 
@@ -196,11 +214,7 @@ const Contact = () => {
               required
               rows={5}
               placeholder="Your message..."
-              className={`w-full px-5 py-4 rounded-xl border transition-all duration-300 resize-none ${
-                isDark
-                  ? "bg-white/5 border-white/10 text-white placeholder-gray-500 focus:border-[#3B9797]/50 focus:bg-white/[0.07]"
-                  : "bg-white border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#3B9797]/50 focus:bg-gray-50 shadow-sm"
-              } focus:outline-none`}
+              className={`${inputClasses} resize-none`}
             />
 
             <motion.button
@@ -216,14 +230,8 @@ const Contact = () => {
               <span className="flex items-center justify-center gap-2">
                 {isSubmitting ? (
                   <>
-                    <motion.div
-                      className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{
-                        duration: 1,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
+                    <div
+                      className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"
                     />
                     Sending...
                   </>
@@ -242,19 +250,7 @@ const Contact = () => {
             className="mt-12 flex justify-center gap-4"
           >
             {socialLinks.map((social) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                className={`w-12 h-12 rounded-xl border flex items-center justify-center transition-all duration-300 ${
-                  isDark
-                    ? "bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20"
-                    : "bg-gray-100 border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-200 hover:border-gray-300"
-                }`}
-                whileHover={{ y: -4 }}
-                aria-label={social.label}
-              >
-                <social.icon className="w-5 h-5" />
-              </motion.a>
+              <SocialLink key={social.label} social={social} isDark={isDark} />
             ))}
           </motion.div>
 

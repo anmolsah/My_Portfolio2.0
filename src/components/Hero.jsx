@@ -1,114 +1,100 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import { memo, useMemo } from "react";
+
+const socialLinks = [
+  { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
+  {
+    icon: Linkedin,
+    href: "https://www.linkedin.com/in/anmol-sah-551083238/",
+    label: "LinkedIn",
+  },
+  { icon: Mail, href: "mailto:annifind010@gmail.com", label: "Email" },
+];
+
+const SocialLink = memo(({ social, isDark, index }) => (
+  <motion.a
+    href={social.href}
+    target={social.label !== "Email" ? "_blank" : undefined}
+    rel={social.label !== "Email" ? "noopener noreferrer" : undefined}
+    className={`p-3 rounded-xl border transition-all duration-300 hover:text-[#3B9797] hover:bg-[#3B9797]/10 hover:border-[#3B9797]/30 ${
+      isDark
+        ? "bg-white/5 border-white/10 text-gray-400"
+        : "bg-gray-100 border-gray-200 text-gray-600"
+    }`}
+    whileHover={{ scale: 1.1, y: -2 }}
+    whileTap={{ scale: 0.95 }}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.8 + index * 0.1 }}
+    aria-label={social.label}
+  >
+    <social.icon className="w-5 h-5" />
+  </motion.a>
+));
+
+SocialLink.displayName = 'SocialLink';
 
 const Hero = () => {
   const { isDark } = useTheme();
-  const containerVariants = {
+
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
+        staggerChildren: 0.12,
+        delayChildren: 0.2,
       },
     },
-  };
+  }), []);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+  const itemVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        duration: 0.6,
+        ease: "easeOut",
       },
     },
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      rotate: [-2, 2, -2],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const socialLinks = [
-    { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
-    {
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/anmol-sah-551083238/",
-      label: "LinkedIn",
-    },
-    { icon: Mail, href: "annifind010@gamil.com", label: "Email" },
-  ];
+  }), []);
 
   return (
     <section className="section-snap relative min-h-screen flex items-center justify-center overflow-hidden grid-bg noise-overlay">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px]"
-          style={{ backgroundColor: "rgba(191, 9, 47, 0.2)" }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full blur-[50px] opacity-25"
+          style={{ backgroundColor: "rgba(191, 9, 47, 0.4)" }}
         />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[100px]"
-          style={{ backgroundColor: "rgba(22, 71, 106, 0.25)" }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full blur-[45px] opacity-30"
+          style={{ backgroundColor: "rgba(22, 71, 106, 0.5)" }}
         />
-        <motion.div
-          className="absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full blur-[80px]"
-          style={{ backgroundColor: "rgba(59, 151, 151, 0.15)" }}
-          animate={{
-            x: [-20, 20, -20],
-            y: [20, -20, 20],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute top-1/2 right-1/3 w-[250px] h-[250px] rounded-full blur-[40px] opacity-20"
+          style={{ backgroundColor: "rgba(59, 151, 151, 0.3)" }}
         />
       </div>
 
-      <motion.div
-        className="absolute top-20 right-20 md:right-40"
-        variants={floatingVariants}
-        animate="animate"
-      >
-        <div
-          className="w-20 h-20 md:w-32 md:h-32 rounded-2xl backdrop-blur-sm border border-white/10 rotate-12"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(191, 9, 47, 0.2), rgba(22, 71, 106, 0.2))",
-          }}
-        />
-      </motion.div>
+      <div
+        className="absolute top-20 right-20 md:right-40 w-20 h-20 md:w-32 md:h-32 rounded-2xl backdrop-blur-sm border border-white/10 rotate-12 animate-float"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(191, 9, 47, 0.2), rgba(22, 71, 106, 0.2))",
+        }}
+      />
 
-      <motion.div
-        className="absolute bottom-32 left-10 md:left-32"
-        variants={floatingVariants}
-        animate="animate"
-        transition={{ delay: 2 }}
-      >
-        <div
-          className="w-16 h-16 md:w-24 md:h-24 rounded-full backdrop-blur-sm border border-white/10"
-          style={{
-            background:
-              "linear-gradient(135deg, rgba(22, 71, 106, 0.2), rgba(59, 151, 151, 0.2))",
-          }}
-        />
-      </motion.div>
+      <div
+        className="absolute bottom-32 left-10 md:left-32 w-16 h-16 md:w-24 md:h-24 rounded-full backdrop-blur-sm border border-white/10 animate-float"
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(22, 71, 106, 0.2), rgba(59, 151, 151, 0.2))",
+          animationDelay: "2s",
+        }}
+      />
 
       <motion.div
         className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto"
@@ -169,21 +155,13 @@ const Hero = () => {
           >
             <span className="relative z-10 flex items-center justify-center gap-2">
               View My Work
-              <motion.span
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
+              <span>→</span>
             </span>
-            <motion.div
-              className="absolute inset-0"
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               style={{
                 background: "linear-gradient(135deg, #16476A, #3B9797)",
               }}
-              initial={{ x: "100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
             />
           </motion.a>
 
@@ -206,23 +184,12 @@ const Hero = () => {
           className="flex items-center justify-center gap-4"
         >
           {socialLinks.map((social, index) => (
-            <motion.a
+            <SocialLink
               key={social.label}
-              href={social.href}
-              className={`p-3 rounded-xl border transition-all duration-300 hover:text-[#3B9797] hover:bg-[#3B9797]/10 hover:border-[#3B9797]/30 ${
-                isDark
-                  ? "bg-white/5 border-white/10 text-gray-400"
-                  : "bg-gray-100 border-gray-200 text-gray-600"
-              }`}
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 + index * 0.1 }}
-              aria-label={social.label}
-            >
-              <social.icon className="w-5 h-5" />
-            </motion.a>
+              social={social}
+              isDark={isDark}
+              index={index}
+            />
           ))}
         </motion.div>
       </motion.div>
@@ -232,7 +199,7 @@ const Hero = () => {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
+        transition={{ delay: 1.2, duration: 0.6 }}
         onClick={(e) => {
           e.preventDefault();
           document
@@ -240,16 +207,15 @@ const Hero = () => {
             ?.scrollIntoView({ behavior: "smooth" });
         }}
       >
-        <motion.div
-          className={`flex flex-col items-center gap-2 hover:text-[#3B9797] transition-colors ${
+        <div
+          className={`flex flex-col items-center gap-2 hover:text-[#3B9797] transition-colors animate-bounce ${
             isDark ? "text-gray-500" : "text-gray-400"
           }`}
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          style={{ animationDuration: "2s" }}
         >
           <span className="text-xs uppercase tracking-widest">Scroll</span>
           <ArrowDown className="w-4 h-4" />
-        </motion.div>
+        </div>
       </motion.a>
     </section>
   );

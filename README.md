@@ -2,14 +2,14 @@
 
 A modern, responsive personal portfolio website built with React and Tailwind CSS.
 
-## ✨ Features
+##  Features
 
 - Responsive design that works on all devices
 - Smooth animations powered by Framer Motion
 - Contact form with EmailJS integration
 - Clean, dark-themed UI
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - React 19
 - Tailwind CSS 4
@@ -18,7 +18,7 @@ A modern, responsive personal portfolio website built with React and Tailwind CS
 - Lucide React Icons
 - EmailJS
 
-## 🚀 Getting Started
+##  Getting Started
 
 ```bash
 # Install dependencies
@@ -34,7 +34,7 @@ npm run build
 npm run preview
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -50,6 +50,6 @@ src/
 └── index.css
 ```
 
-## 📄 License
+##  License
 
 MIT
