@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
-import { memo, useMemo } from "react";
+import { memo, useMemo, useState, useEffect } from "react";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/anmolsah", label: "GitHub" },
@@ -38,6 +38,48 @@ SocialLink.displayName = 'SocialLink';
 
 const Hero = () => {
   const { isDark } = useTheme();
+  
+  // Typewriter state
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(150);
+
+  const titles = useMemo(() => ["Full Stack Developer", "Frontend Developer", "Backend Developer"], []);
+
+  useEffect(() => {
+    const handleTyping = () => {
+      const i = loopNum % titles.length;
+      const fullText = titles[i];
+
+      setText(isDeleting 
+        ? fullText.substring(0, text.length - 1) 
+        : fullText.substring(0, text.length + 1)
+      );
+
+      // Typing speed adjustment
+      if (isDeleting) {
+        setTypingSpeed(50); // Faster deleting
+      } else {
+        setTypingSpeed(150); // Normal typing
+      }
+
+      // Check boundaries
+      if (!isDeleting && text === fullText) {
+        // Finished typing word, pause then delete
+        setTypingSpeed(2000); 
+        setIsDeleting(true);
+      } else if (isDeleting && text === "") {
+        // Finished deleting, move to next word
+        setIsDeleting(false);
+        setLoopNum(loopNum + 1);
+        setTypingSpeed(500);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, titles, typingSpeed]);
 
   const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
@@ -113,21 +155,22 @@ const Hero = () => {
 
         <motion.div variants={itemVariants} className="mb-6 md:mb-8">
           <div className="inline-flex items-center gap-3">
-            <Sparkles
+            {/* <Sparkles
               className="w-5 h-5 md:w-6 md:h-6"
               style={{ color: "#BF092F" }}
-            />
+            /> */}
             <h2
-              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium ${
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium min-h-[1.5em] ${
                 isDark ? "text-gray-200" : "text-gray-700"
               }`}
             >
-              Full Stack Developer
+              {text}
+              <span className="animate-pulse border-r-2 border-[#3B9797] ml-1">&nbsp;</span>
             </h2>
-            <Sparkles
+            {/* <Sparkles
               className="w-5 h-5 md:w-6 md:h-6"
               style={{ color: "#3B9797" }}
-            />
+            /> */}
           </div>
         </motion.div>
 
