@@ -34,7 +34,7 @@ const LazyVideo = memo(({ src, isVisible }) => {
   );
 });
 
-LazyVideo.displayName = 'LazyVideo';
+LazyVideo.displayName = "LazyVideo";
 
 const ProjectCard = memo(({ project, index, isDark }) => {
   const cardRef = useRef(null);
@@ -48,7 +48,7 @@ const ProjectCard = memo(({ project, index, isDark }) => {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.2, rootMargin: '100px' }
+      { threshold: 0.2, rootMargin: "100px" },
     );
 
     observer.observe(card);
@@ -104,8 +104,7 @@ const ProjectCard = memo(({ project, index, isDark }) => {
         <div
           className="absolute -inset-1 rounded-2xl -z-10 opacity-30 blur-sm"
           style={{
-            background:
-              "linear-gradient(135deg, #BF092F, #16476A, #3B9797)",
+            background: "linear-gradient(135deg, #BF092F, #16476A, #3B9797)",
           }}
         />
       </motion.div>
@@ -193,7 +192,7 @@ const ProjectCard = memo(({ project, index, isDark }) => {
   );
 });
 
-ProjectCard.displayName = 'ProjectCard';
+ProjectCard.displayName = "ProjectCard";
 
 const projects = [
   {
@@ -217,11 +216,20 @@ const projects = [
   },
   {
     title: "THUMBGEN",
-    description:
-      "AI-Powered Thumbnail Generator for Content Creators.",
+    description: "AI-Powered Thumbnail Generator for Content Creators.",
     video:
       "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1767188529/thumgen_vid_mxaktz.mp4",
-    tags: ["React", "Mongodb", "Expressjs", "Nodejs", "Typescript", "Imagen 4.0 & Gemini", "Cashfree Payemnt", "Cloudinary","Brevo"],
+    tags: [
+      "React",
+      "Mongodb",
+      "Expressjs",
+      "Nodejs",
+      "Typescript",
+      "Imagen 4.0 & Gemini",
+      "Cashfree Payemnt",
+      "Cloudinary",
+      "Brevo",
+    ],
     github: "https://github.com/anmolsah/ThumbGen.ai",
     live: "https://thumb-gen-ai-pink.vercel.app/",
     featured: true,
@@ -253,6 +261,17 @@ const projects = [
     tags: ["React", "Supabase", "TMDB API", "OpenRoueter API"],
     github: "https://github.com/anmolsah/movieco",
     live: "https://movieco-ubb9.vercel.app/",
+    featured: true,
+  },
+  {
+    title: "Firstissue.dev",
+    description:
+      "A platform designed to help developers discover beginner-friendly open source issues and track their contribution journey.",
+    video:
+      "https://res.cloudinary.com/dl3czd3ib/video/upload/f_auto,q_auto/v1769696366/firstissue.dev_project_je6zyn.mp4",
+    tags: ["React", "Supabase", "Kiro IDE", "Github API"],
+    github: "https://github.com/anmolsah/firstissue.dev",
+    live: "https://www.firstissue.dev/",
     featured: true,
   },
 ];

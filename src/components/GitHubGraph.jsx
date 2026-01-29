@@ -3,16 +3,20 @@ import { Github } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 import { memo, useMemo } from "react";
 
-const LegendIndicator = memo(({ opacity, isDark }) => (
-  <div
-    className="w-3 h-3 rounded-sm"
-    style={{
-      backgroundColor: isDark
-        ? `rgba(59, 151, 151, ${opacity})`
-        : `rgba(22, 71, 106, ${opacity})`,
-    }}
-  />
-));
+const LegendIndicator = memo(({ level, isDark }) => {
+  // GitHub's authentic contribution colors
+  const darkColors = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+  const lightColors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+  
+  return (
+    <div
+      className="w-3 h-3 rounded-sm"
+      style={{
+        backgroundColor: isDark ? darkColors[level] : lightColors[level],
+      }}
+    />
+  );
+});
 
 LegendIndicator.displayName = 'LegendIndicator';
 
@@ -22,11 +26,9 @@ const GitHubGraph = () => {
   
   const graphUrl = useMemo(() => 
     isDark 
-      ? `https://ghchart.rshah.org/3B9797/${username}`
-      : `https://ghchart.rshah.org/16476A/${username}`
+      ? `https://ghchart.rshah.org/39d353/${username}`
+      : `https://ghchart.rshah.org/216e39/${username}`
   , [isDark]);
-
-  const opacityLevels = useMemo(() => [0.1, 0.3, 0.5, 0.7, 1], []);
 
   return (
     <motion.div
@@ -51,7 +53,7 @@ const GitHubGraph = () => {
           >
             <Github
               className="w-5 h-5"
-              style={{ color: isDark ? "#3B9797" : "#16476A" }}
+              style={{ color: isDark ? "#39d353" : "#216e39" }}
             />
           </div>
           <div>
@@ -87,8 +89,8 @@ const GitHubGraph = () => {
           <div className="flex items-center gap-2">
             <span className="text-sm text-gray-500">Less</span>
             <div className="flex gap-1">
-              {opacityLevels.map((opacity, i) => (
-                <LegendIndicator key={i} opacity={opacity} isDark={isDark} />
+              {[0, 1, 2, 3, 4].map((level) => (
+                <LegendIndicator key={level} level={level} isDark={isDark} />
               ))}
             </div>
             <span className="text-sm text-gray-500">More</span>
