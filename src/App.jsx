@@ -5,6 +5,7 @@ import About from "./components/About";
 import GitHubGraph from "./components/GitHubGraph";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
+import AIConcierge from "./components/AIConcierge";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
 const AppContent = () => {
@@ -23,6 +24,7 @@ const AppContent = () => {
       <GitHubGraph />
       <Skills />
       <Contact />
+      <AIConcierge />
     </main>
   );
 };
