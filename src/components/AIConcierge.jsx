@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles, Loader2 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
@@ -59,7 +59,7 @@ const AIConcierge = () => {
             "X-Title": "Anmol's Portfolio",
           },
           body: JSON.stringify({
-            model: "meta-llama/llama-3.3-70b-instruct:free", //arcee-ai/trinity-large-preview:free
+            model: "liquid/lfm-2.5-1.2b-instruct:free", //arcee-ai/trinity-large-preview:free
             messages: [
               {
                 role: "system",
@@ -185,7 +185,7 @@ Remember: You're here to showcase Anmol's skills while being entertaining and he
                   >
                     AI Concierge
                   </h3>
-                  <p className="text-xs text-gray-500">Powered by Llama 3.3</p>
+                  <p className="text-xs text-gray-500">Powered by Liquid AI</p>
                 </div>
               </div>
               <button
