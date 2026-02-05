@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles, Loader2 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
@@ -302,7 +302,8 @@ Remember: You're here to showcase Anmol's skills while being entertaining and he
       {!isOpen && (
         <motion.button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-xl z-50 flex items-center justify-center touch-manipulation"
+          className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-rose-700 to-blue-900
+ text-white shadow-xl z-50 flex items-center justify-center touch-manipulation"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           animate={{ y: [0, -8, 0] }}
